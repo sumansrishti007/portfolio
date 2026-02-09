@@ -40,6 +40,16 @@ export default function Footer() {
             </a>
           </p>
           <p>
+            6 DOF Robot Arm Simulator:{" "}
+            <a
+              href="https://robotic-arm-frontend-bcdr.onrender.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Live Demo
+            </a>
+          </p>
+          <p>
             LeetCode:{" "}
             <a
               href="https://leetcode.com/sumansrishti"
