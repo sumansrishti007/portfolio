@@ -12,7 +12,7 @@ export default function Projects() {
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
     </section>

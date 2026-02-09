@@ -1,51 +1,59 @@
-import type { Project } from "@/data/projects";
+import { Project } from "@/data/projects";
+import { Github, ExternalLink } from "lucide-react";
 
-type Props = {
+interface ProjectCardProps {
   project: Project;
-};
+}
 
-export default function ProjectCard({ project }: Props) {
+export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="flex flex-col justify-between rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-      <div>
-        <div className="flex items-baseline justify-between gap-2">
-          <h3 className="text-sm font-semibold text-slate-100">
+    <div
+      className={`group relative rounded-lg border p-5 transition-all duration-300 hover:border-blue-500/50 hover:bg-slate-800/50 ${
+        project.featured
+          ? "border-blue-500/30 bg-slate-800/30"
+          : "border-slate-700 bg-slate-900/50"
+      }`}
+    >
+      {project.featured && (
+        <span className="absolute -top-2 right-3 rounded bg-blue-500 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white">
+          Featured
+        </span>
+      )}
+
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors">
             {project.title}
           </h3>
-          {project.period && (
-            <span className="text-[10px] uppercase tracking-wide text-slate-400">
-              {project.period}
-            </span>
-          )}
+          <p className="mt-1 text-sm text-slate-400">{project.description}</p>
         </div>
-
-        <p className="mt-2 text-xs text-slate-300">
-          {project.description}
-        </p>
-
-        <p className="mt-2 text-xs text-sky-300">{project.highlight}</p>
-
-        <ul className="mt-3 flex flex-wrap gap-2 text-[11px] text-slate-200">
-          {project.tech.map((t) => (
-            <li
-              key={t}
-              className="rounded-full bg-slate-800 px-2.5 py-1"
-            >
-              {t}
-            </li>
-          ))}
-        </ul>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-3 text-xs">
+      <p className="mt-3 text-sm text-slate-300 leading-relaxed">
+        {project.problem}
+      </p>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {project.tech.map((tech) => (
+          <span
+            key={tech}
+            className="rounded-full bg-slate-700/50 px-2.5 py-1 text-xs text-slate-300"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-4 flex items-center gap-4">
         {project.liveUrl && (
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-sky-500 px-4 py-1 text-sky-300 hover:bg-sky-500 hover:text-slate-950"
+            className="flex items-center gap-1.5 text-sm text-blue-400 hover:text-blue-300 transition-colors"
           >
-            Live demo
+            <ExternalLink size={14} />
+            Live Demo
           </a>
         )}
         {project.githubUrl && (
@@ -53,12 +61,13 @@ export default function ProjectCard({ project }: Props) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-slate-700 px-4 py-1 text-slate-200 hover:border-sky-400 hover:text-sky-400"
+            className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors"
           >
-            GitHub
+            <Github size={14} />
+            Code
           </a>
         )}
       </div>
-    </article>
+    </div>
   );
 }
